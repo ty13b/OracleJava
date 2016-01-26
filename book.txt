@@ -1,0 +1,13 @@
+This is a file called book.txt. I am not too sure if anything in this file is even supposed to make sense.
+GitHub is a great way to share and update files in a repository. This file is supposed to be a paragraph,
+but right now it is only three sentences. Oh well.
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.DS_Store
+	book.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
