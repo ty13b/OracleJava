@@ -1,7 +1,9 @@
 /**
  * 
  */
-package controller;
+//package controller;
+import java.util.Scanner;
+import java.io.*;
 
 /**
  * @author Esteban
@@ -12,12 +14,19 @@ public class HardwoodSeller {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException{
+		readInputFile(args[0]);
 		// TODO Auto-generated method stub
 
 	}
 	
-	public void readInputFile(String inputFilePath){
+	public static void readInputFile(String inputFilePath) throws FileNotFoundException{
+		Scanner scanner = new Scanner(new File(inputFilePath));
+
+		scanner.useDelimiter(";");
+		while(scanner.hasNext()){
+			System.out.println(scanner.next());
+		}
 		
 	}
 	
@@ -25,5 +34,4 @@ public class HardwoodSeller {
 		Double deliveryETA = 0.0;
 		return deliveryETA;
 	}
-	
 }
