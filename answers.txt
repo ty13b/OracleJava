@@ -1,0 +1,11 @@
+Answers.txt
+
+a) Two
+b) Aug 20 2015
+c) HardwoodSeller.java, .classpath, .gitattributes, .gitignore, .project
+d) WoodItem.java - updated once after creation
+   HardwoodSeller.java - not updated after creation
+e) The difference between git log and status is that git log shows all of the past commits that have been performed, while git status shows what commits would be made if the commit command was made.
+f) git log --follow main.java
+g) git log --grep transaction
+h) git log --author=Lauren --after="2015-1-5" --before="2015-2-16"
