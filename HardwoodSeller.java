@@ -14,14 +14,14 @@ public class HardwoodSeller {
 	/**
 	 * @param args
 	 */
-	String name;
-	String address;
-	String date;
-	int woodCount;
-	WoodItem[] wood = new WoodItem[6];
-	int[] woodAmount = new int[6];
+	String name; //Name on the order
+	String address; //Address from text file
+	String date;//Date from text file
+	int woodCount;//Amount of wood orders
+	WoodItem[] wood = new WoodItem[6];//holds wood orders
+	int[] woodAmount = new int[6];//holds amount of wood in parallel with wood array
 
-
+	//Constuctor for PRIVATE constructor
 	private HardwoodSeller(String s) throws FileNotFoundException{
 		woodCount=0;
 		readInputFile(s);
@@ -31,10 +31,9 @@ public class HardwoodSeller {
 
 	public static void main(String[] args) throws FileNotFoundException{
 		HardwoodSeller h = new HardwoodSeller(args[0]);
-		// TODO Auto-generated method stub
-
 	}
 	
+	//Function to read the input from the text file
 	public void readInputFile(String inputFilePath) throws FileNotFoundException{
 		Scanner scanner = new Scanner(new File(inputFilePath));
 
@@ -47,20 +46,18 @@ public class HardwoodSeller {
 				address = scanner.next();
 			if(x==2)
 				date = scanner.next();
-			if(x > 2){	
-				//System.out.println(scanner.next());
+			if(x > 2)
 				addWood(scanner.next());
-			}
 			x++;
 		}
 		
 	}
 
+	//This function takes a string with a wood name and an amount and puts it in their respective arrays
 	public void addWood(String s){
 		int pos = s.indexOf(':');
 		String word = s.substring(0,pos);
 		String temp = (s.substring(pos+1));
-		//System.out.println(word+" "+num);
 		int num = Integer.parseInt(temp);
 		switch(word.toLowerCase()){
 			case "cherry": wood[woodCount] = new WoodItem("Cherry", 2.5, 5.95); break;
@@ -74,6 +71,7 @@ public class HardwoodSeller {
 		woodCount++;
 	}
 	
+	//Calculates the max delivery time of all items and returns it as a double
 	public double deliveryTime(){
 		double deliveryETA = 0.0;
 		double woodScale = 0.0;
@@ -97,6 +95,7 @@ public class HardwoodSeller {
 		return deliveryETA;
 	}
 
+	//Prints the entire order form with all of the information
 	public void printOrder(){
 		System.out.println("\nName: " + name);
 		System.out.println("Address: " + address);
@@ -109,10 +108,10 @@ public class HardwoodSeller {
 			double price = wood[x].getPrice();
 			double tempTotal = (double)amt * price;
 			total += tempTotal;
-			System.out.println(name + ": " + amt + " @ "+ price + " = "+ tempTotal);
+			System.out.println(name + ": " + amt + " units @ "+ price + " = $"+ tempTotal);
 		}
 		System.out.println("-----------------------------------------------");
-		System.out.println("Estimated Delivery: " + deliveryTime());
+		System.out.println("Estimated Delivery: " + deliveryTime() + " hours");
 		System.out.println("Total Price: $" + total);
 	}
 }
