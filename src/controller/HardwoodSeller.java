@@ -25,11 +25,7 @@ public class HardwoodSeller {
 	private HardwoodSeller(String s) throws FileNotFoundException{
 		woodCount=0;
 		readInputFile(s);
-		System.out.println("Name: " + name);
-		System.out.println("Address: " + address);
-		System.out.println("Date: " + date);
-		for(int x=0 ; x<woodCount; x++)
-			System.out.println(wood[x].toString() + " " + woodAmount[x]);
+		printOrder();
 		
 	}
 
@@ -78,8 +74,45 @@ public class HardwoodSeller {
 		woodCount++;
 	}
 	
-	public Double deliveryTime(){
-		Double deliveryETA = 0.0;
+	public double deliveryTime(){
+		double deliveryETA = 0.0;
+		double woodScale = 0.0;
+		for(int i = 0; i < woodCount; i++){
+			if(woodAmount[i]>500)
+				woodScale = 5.5;
+			if(woodAmount[i] >= 1 && woodAmount[i] <= 100)
+				woodScale = 1.0;
+			if(woodAmount[i] >= 101 && woodAmount[i] <= 200)
+				woodScale = 2.0;
+			if(woodAmount[i] >= 201 && woodAmount[i] <= 300)
+				woodScale = 3.0;
+			if(woodAmount[i] >= 301 && woodAmount[i] <= 400)
+				woodScale = 4.0;
+			if(woodAmount[i] >= 401 && woodAmount[i] <= 500)
+				woodScale = 5.0;
+			if(woodScale*wood[i].getBaseDeliveryTime() > deliveryETA)
+				deliveryETA = woodScale*wood[i].getBaseDeliveryTime();
+			woodScale=0.0;
+		}
 		return deliveryETA;
+	}
+
+	public void printOrder(){
+		System.out.println("\nName: " + name);
+		System.out.println("Address: " + address);
+		System.out.println("Date: " + date);
+		System.out.println("-----------------------------------------------");
+		double total = 0.0;
+		for(int x=0 ; x<woodCount; x++){
+			String name = wood[x].toString();
+			int amt = woodAmount[x];
+			double price = wood[x].getPrice();
+			double tempTotal = (double)amt * price;
+			total += tempTotal;
+			System.out.println(name + ": " + amt + " @ "+ price + " = "+ tempTotal);
+		}
+		System.out.println("-----------------------------------------------");
+		System.out.println("Estimated Delivery: " + deliveryTime());
+		System.out.println("Total Price: $" + total);
 	}
 }
